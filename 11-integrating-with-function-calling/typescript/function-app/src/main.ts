@@ -41,7 +41,9 @@ const getCurrentWeatherFunction = {
 
 async function main() {
   try {
-    console.log("== Chat Completions App with Functions ==");
+    console.log("🚀 == Chat Completions App with Functions ==");
+    console.log("📍 This is the LAST and most advanced app project in the course!");
+    console.log("🔧 Integrating Azure OpenAI with external Bing Maps API\n");
 
     const client = new OpenAIClient(endpoint, new AzureKeyCredential(azureApiKey));
     const deploymentName = "gpt-4"; // if you want to use 'gpt-4' model you need to create a resource in Sweden Central region
@@ -50,6 +52,9 @@ async function main() {
       location: "New York", 
       unit: "C" 
     };
+    
+    console.log("⚡ User Query:", `What's the weather in ${userParams.location}, ${userParams.unit}?`);
+    console.log("🧠 AI will analyze this and call the appropriate function...\n");
     
     const result = await client.getChatCompletions(deploymentName, [
       { 
@@ -61,13 +66,14 @@ async function main() {
     });
 
     for (const choice of result.choices) {
-      console.log(choice.message?.functionCall);
+      console.log("🎯 Function Call Detected:", choice.message?.functionCall);
 
       if (choice.message?.functionCall) {
         const { arguments: argumentsJson } = choice.message.functionCall;
         const { location, unit } = JSON.parse(argumentsJson);
+        console.log("🌍 Calling Bing Maps API for location:", location, "in unit:", unit);
         let response = await findWeather(location, unit);
-        console.log("Result from Bing Maps API..: ", response);
+        console.log("✅ Result from Bing Maps API:", response);
       }
     }
   } catch (error) {
