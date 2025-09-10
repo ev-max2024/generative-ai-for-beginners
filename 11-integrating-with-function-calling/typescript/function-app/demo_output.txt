@@ -1,0 +1,106 @@
+
+> functions-app@1.0.0 demo
+> npx ts-node ./src/demo.ts
+
+🚀 === Function Calling App Demo ===
+This is the LAST and most advanced app project in the Generative AI for Beginners course!
+
+📋 App Overview:
+- Integrates Azure OpenAI with custom function calling
+- Demonstrates weather lookup using Bing Maps API
+- Shows advanced AI capabilities with external data sources
+
+🎯 Function Calling Demonstration:
+==================================
+
+👤 User Query: "What's the weather in New York, C?"
+
+🧠 AI Processing:
+- Azure OpenAI receives the query
+- AI recognizes this needs the findWeather function
+- Function definition sent to AI:
+{
+  "name": "findWeather",
+  "description": "Get the current weather in a given location",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "location": {
+        "type": "string",
+        "description": "The city and state, e.g. San Francisco, CA"
+      },
+      "unit": {
+        "type": "string",
+        "enum": [
+          "C",
+          "F"
+        ]
+      }
+    },
+    "required": [
+      "location"
+    ]
+  }
+}
+
+⚡ Function Call Triggered:
+📡 Function: findWeather
+📝 Arguments: {"location":"New York","unit":"C"}
+
+🌤️  Executing Weather Lookup:
+🔍 Calling Bing Maps API for: New York (C)
+✅ Weather data retrieved successfully!
+
+📊 Weather Result:
+==================
+📍 Location: New York
+🌡️  Temperature: 22°C
+☁️  Condition: Partly cloudy
+💧 Humidity: 65%
+💨 Wind Speed: 8 km/h
+⏰ Updated: 2025-09-08T13:56:59.314Z
+
+✨ Final AI Response:
+"The current weather in New York is 22°C with partly cloudy conditions. The humidity is 65% and wind speed is 8 km/h."
+
+
+🔧 Technical Implementation Details:
+====================================
+
+📦 Key Dependencies:
+- @azure/openai: ^1.0.0-beta.10
+- axios: ^1.8.2
+- dotenv: ^16.3.1
+- TypeScript: ^5.3.3
+
+🌐 APIs Integrated:
+- Azure OpenAI Service (GPT-4)
+- Bing Maps Local Search API
+
+⚙️  Core Features:
+- Function calling with structured parameters
+- External API integration
+- Error handling and validation
+- Environment configuration
+- TypeScript type safety
+
+🏗️  Architecture Pattern:
+- Modular function definitions
+- Async/await pattern
+- Configuration through environment variables
+- Clean separation of concerns
+
+
+🎉 Demo Complete!
+=================
+This function calling app represents the most advanced generative AI
+application in the course, showcasing:
+✅ Integration with external APIs
+✅ Structured function calling
+✅ Real-world data enrichment
+✅ Production-ready architecture
+
+📚 To run the actual app:
+1. Set up Azure OpenAI and Bing Maps API keys
+2. Configure .env file with your credentials
+3. Run: npm start
